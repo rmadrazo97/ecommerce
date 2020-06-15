@@ -1,0 +1,61 @@
+.shadow-down {
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(50, 50, 50, 0.57);
+  -moz-box-shadow: 0px -1px 4px 0px rgba(50, 50, 50, 0.57);
+  box-shadow: 0px -1px 4px 0px rgba(50, 50, 50, 0.57);
+}
+
+.horitzontalScroll {
+  min-width: 100%;
+  min-height: 50px;
+  display: flex;
+  overflow-x: auto;
+}
+
+.fixed-top.bg-grad1 {
+  background: rgba(50,80,221,1);
+  background: -moz-linear-gradient(63deg, rgba(50,80,221,1)  0%, rgba(163,217,229,1) 100%);
+  background: -webkit-linear-gradient(63deg, rgba(50,80,221,1) 0%, rgba(163,217,229,1) 100%);
+  background: linear-gradient(63deg,rgba(50,80,221,1)  0%, rgb(163,217,229) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a3d9e5",endColorstr="#3250dd",GradientType=1);
+}
+
+.carousel-inner > .carousel-item {
+  height: 50vh;
+}
+
+.carousel-inner > .carousel-item > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: 50vh;
+  object-fit: cover;
+  width: auto;
+}
+
+.carousel-control.left, .carousel-control.right {
+  background-image: none;
+}
+
+.catCol {
+  transition: all .2s ease-in-out;
+}
+
+.catCol:hover {
+  transform: scale(1.1);
+}
+
+.no-border {
+  border: 0px !important;
+}
+
+.lead-carousel {
+  height: 20vh !important;
+}
+
+.lead-img {
+  height: 30vh !important;
+}
+
