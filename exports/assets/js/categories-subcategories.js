@@ -3,6 +3,7 @@ function getCategories() {
     $('#index-categoriesRow').empty();
     console.log('Getting Categories...');
     var url = apiUrl + "action=list&object=categories";
+    const folder = 'Categories/';
     $.ajax({
         url: url,
         type: "GET",
@@ -10,8 +11,9 @@ function getCategories() {
             if (data.success) {
                 console.log(data);
                 data.categories.forEach(function (category, index) {
+                    let url = imgUrl + folder + category.image;
                     let toAppend = '<div class="col d-block col-6 col-md-3 col-sm-6 pt-1 pb-1 catCol" onclick="location.href=&#39;category.html?category=' + category.id + '&#39;;">' +
-                        '<img class="d-block img-responsive center-block" src="' + category.image + '" width="100%" /></div>';
+                        '<img class="d-block img-responsive center-block" src="' + url + '" width="100%" /></div>';
                     $('#index-categoriesRow').append(toAppend)
                 });
 
@@ -44,6 +46,7 @@ function getSubcategories() {
     console.log("category id: " + category);
 
     var url = apiUrl + "action=list&object=sub_categories&category=" + category;
+    const folder = 'SubCategories/';
     $.ajax({
         url: url,
         type: "GET",
@@ -60,8 +63,9 @@ function getSubcategories() {
                 }
 
                 data.sub_categories.forEach(function (subcategory, index) {
+                    let url = imgUrl + folder + subcategory.imagen;
                     let toAppend = '<div class="col d-block col-6 col-md-3 col-sm-6 pt-1 pb-1 catCol" onclick="#">' +
-                        '<img class="d-block img-responsive center-block" src="' + subcategory.imagen + '" width="100%" /></div>';
+                        '<img class="d-block img-responsive center-block" src="' + url + '" width="100%" /></div>';
                     $('#category-subcategoriesRow').append(toAppend)
                 });
 

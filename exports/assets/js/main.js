@@ -13,6 +13,9 @@ const apiUrl = 'https://927d1d30.us-south.apigw.appdomain.cloud/laplaza/?';
 // Secure (SSL) URL for POST Methods
 const postUrl = 'https://927d1d30.us-south.apigw.appdomain.cloud/laplaza/';
 
+// Optimized image base URL
+const imgUrl = 'https://res.cloudinary.com/laplaza-on-gt/image/upload/c_scale,w_450/v1592327005/'
+
 // Session Variables
 // getting token from session
 let token = localStorage.getItem('token');
