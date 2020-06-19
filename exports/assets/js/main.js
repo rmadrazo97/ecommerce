@@ -15,6 +15,7 @@ const postUrl = 'https://927d1d30.us-south.apigw.appdomain.cloud/laplaza/';
 
 // Optimized image base URL
 const imgUrl = 'https://res.cloudinary.com/laplaza-on-gt/image/upload/c_scale,w_450/v1592327005/'
+const bannerUrl = 'https://res.cloudinary.com/laplaza-on-gt/image/upload/c_scale,w_1000/v1592327005/'
 
 // Session Variables
 // getting token from session
@@ -25,6 +26,10 @@ let email = localStorage.getItem('email');
 
 // getting userID from session
 let userID = localStorage.getItem('userID');
+
+
+// Global data persistence
+let categoriesList = JSON.parse(localStorage.getItem('categories'));
 
 // ----------------------------------------------
 // ------------ GLOBAL VARIABLES END ------------
@@ -41,9 +46,11 @@ $(document).ready(function () {
     // checking current site
     if (window.location.pathname == "/") {
         console.log('estoy en home');
+        loadNavBar();
         getCategories();
     } else if (window.location.pathname == "/category.html") {
         console.log('estoy en una categoria');
+        loadNavBar();
         getSubcategories();
     }
 
