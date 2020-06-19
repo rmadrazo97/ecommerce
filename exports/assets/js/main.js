@@ -13,6 +13,9 @@ const apiUrl = 'https://927d1d30.us-south.apigw.appdomain.cloud/laplaza/?';
 // Secure (SSL) URL for POST Methods
 const postUrl = 'https://927d1d30.us-south.apigw.appdomain.cloud/laplaza/';
 
+// Optimized image base URL
+const imgUrl = 'https://res.cloudinary.com/laplaza-on-gt/image/upload/c_scale,w_450/v1592327005/'
+
 // Session Variables
 // getting token from session
 let token = localStorage.getItem('token');
@@ -32,17 +35,18 @@ let userID = localStorage.getItem('userID');
 $(document).ready(function () {
 
     console.log("ready!");
-  
+
     anonymousLogin();
 
     // checking current site
     if (window.location.pathname == "/") {
         console.log('estoy en home');
-        
+        getCategories();
     } else if (window.location.pathname == "/category.html") {
         console.log('estoy en una categoria');
+        getSubcategories();
     }
-    
+
 
 });
 
@@ -54,7 +58,7 @@ function anonymousLogin() {
     var password;
 
     email = 'Admin',
-    password = '123123';
+        password = '123123';
 
     var data = "username=" + email + "&password=" + password;
     data += '&action=login';
@@ -64,7 +68,7 @@ function anonymousLogin() {
         token = data.JWT;
 
         // funciones iniciales
-        getCategories();
+
 
         // Guardamos a local storage
         // Correo
@@ -90,7 +94,7 @@ function anonymousLogin() {
 // Funciones Genericas
 
 function getGenerico() {
-	let key = '1';
+    let key = '1';
     console.log('GET Generico...');
     var url = apiUrl + "action=list&object=<<tablename>>&<<key>>=" + key;
     $.ajax({
@@ -110,7 +114,7 @@ function getGenerico() {
 
         },
         beforeSend: function (request) { // Set JWT header
-        	// mandar Token de autenticacion
+            // mandar Token de autenticacion
             request.setRequestHeader('Authorization', 'Bearer ' + token);
         }
     });
@@ -118,35 +122,35 @@ function getGenerico() {
 
 // POST generico
 // usamos post para agregar o editar
-function editPost(id,name){
-	$.ajax({
+function editPost(id, name) {
+    $.ajax({
 
-		url: postUrl,
-		type: "POST",
-		data: {
+        url: postUrl,
+        type: "POST",
+        data: {
 
-			action: 'add', // 'edit'
-			object: '<<tablename>>',
-			// fields... 
-			id: id,
-			name: name
+            action: 'add', // 'edit'
+            object: '<<tablename>>',
+            // fields... 
+            id: id,
+            name: name
 
-		},
-		success: function (data, status, xhr) {
-			if (data.success) {
-				
-				
+        },
+        success: function (data, status, xhr) {
+            if (data.success) {
 
-			} //success 
-			else {
-				console.log('Error' + data[0]);
-			} //else success
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			console.log('Error!')
-		},
-		beforeSend: function (request) { // Set JWT header
-			request.setRequestHeader('Authorization', 'Bearer ' + token);
-		}
-	});
+
+
+            } //success 
+            else {
+                console.log('Error' + data[0]);
+            } //else success
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log('Error!')
+        },
+        beforeSend: function (request) { // Set JWT header
+            request.setRequestHeader('Authorization', 'Bearer ' + token);
+        }
+    });
 }
