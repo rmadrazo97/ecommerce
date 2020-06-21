@@ -75,7 +75,7 @@ function anonymousLogin() {
         token = data.JWT;
 
         // funciones iniciales
-
+        saveCategories();
 
         // Guardamos a local storage
         // Correo
