@@ -1,8 +1,8 @@
 function loadNavBar() {
     $('#categories').empty();
 
-
-    const buscar = '<a class="d-lg-flex align-items-lg-center mt-1" href="#" style="color: white;">' +
+    //* Define constant navbar items
+    const buscar = '<a class="d-lg-flex align-items-lg-center mt-1" id="buscar-toggle" href="#" onclick="collapseBuscar()" style="color: white;">' +
         '   <div class="d-lg-flex horitzontalScrollContent mr-3 ml-2">' +
         '     <div class="row" style="display: none;">' +
         '         <div class="col text-center"><i class="fa fa-trophy"></i></div>' +
@@ -29,6 +29,7 @@ function loadNavBar() {
         '</a>';
     $('#categories').append(ofertas);
 
+    //* End of constat navbar items
 
     if (categoriesList) {
         categoriesList.forEach(category => {
@@ -63,4 +64,10 @@ function loadNavBar() {
         + '   </div>+'
         + ' </div>' +
         + '</a>'
+}
+
+
+function collapseBuscar() {
+    //console.log("I am clicked!");
+    $('#navbar-toggle').click();
 }
