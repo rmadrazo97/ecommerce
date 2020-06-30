@@ -106,21 +106,23 @@ function getSubcategories() {
                                     '<div class="col">' +
                                     '<h4 class="text-left d-inline-block float-left" style="margin-left: 2vw;">' + subcategory.name + '</h4><a class="float-right mr-2 mt-2" data-toggle="modal" data-target="#catModal"><i class="fas fa-shopping-bag mr-2"></i><p class="d-inline-block">Ver más</p></a></div>' +
                                     '</div>' +
-                                    '<section class="text-center d-lg-flex justify-content-lg-center horitzontalScroll">';
+                                    // added padding left to solve problems on desktop
+                                    // 
+                                    '<section class="text-center d-lg-flex justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start horitzontalScroll" style="align-items: baseline;">';
                                 data.products.forEach(function (product, index) {
-                                    let productToAppend = '<a href="#">' + //TODO: Add product link
+                                    let productToAppend = '<a href="#" class="a-productContainer">' + //TODO: Add product link
                                         '<div class="horitzontalScrollContent mr-3 ml-2" style="width: 225px;">' +
                                         '<div class="row">' +
                                         '<div class="col text-center"><img class="border rounded no-border" src="' + product.main_image + '" width="170px" /></div>' +
                                         '</div>' +
                                         '<div class="row">' +
                                         '<div class="col text-center">' +
-                                        '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 15px;color: #47729d;">' + product.desc + '</h1>' +
+                                        '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 15px;color: #47729d;">' + product.name + '</h1>' +
                                         '</div>' +
                                         '</div>' +
                                         '<div class="row">' +
                                         '<div class="col text-center">' +
-                                        '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #47729d;">' + product.name + '</h1>' +
+                                        '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #47729d;">' + product.units + '</h1>' +
                                         '<h1 class="d-inline-block float-none ml-3" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #4354a3;">Q' + product.price + '</h1>' +
                                         '</div>' +
                                         '</div>' +

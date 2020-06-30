@@ -29,3 +29,20 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a3d9e5",endColorstr="#3250dd",GradientType=1);
 }
 
+.float-wp {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 20px;
+  right: 15px;
+  background-color: #25d366;
+  color: #ffffff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999999;
+}
+
+.my-float-wp {
+  margin-top: 9px;
+}
+

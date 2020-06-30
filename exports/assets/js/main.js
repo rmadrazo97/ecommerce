@@ -44,7 +44,7 @@ $(document).ready(function () {
     anonymousLogin();
 
     // checking current site
-    if (window.location.pathname == "/") {
+    if (window.location.pathname == "/" || window.location.pathname == "/index.html" ) {
         console.log('estoy en home');
         loadNavBar();
         getCategories();
