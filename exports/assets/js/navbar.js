@@ -34,7 +34,7 @@ function loadNavBar() {
 
     categoriesList.forEach(category => {
         //console.log(category);
-        let toAppend = '<a class="d-lg-flex align-items-lg-center mt-1" href="#" style="color: white;">' +
+        let toAppend = '<a class="d-lg-flex align-items-lg-center mt-1" href="/category.html?category=' + category.id + '" style="color: white;">' +
             ' <div class="d-lg-flex horitzontalScrollContent mr-3 ml-2">' +
             '   <div class="row" style="display: none;">' +
             '         <div class="col text-center"><i class="fa fa-trophy"></i></div>' +
