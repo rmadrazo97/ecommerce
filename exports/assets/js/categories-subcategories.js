@@ -87,7 +87,7 @@ function getSubcategories() {
                     let noSpaceName = subcategory.name.replace(/ /g, "");; //? Remove whitespaces from subcategory name to use it as a ID
                     //* Add each subcategory card below banner
                     let url = imgUrl + folder + subcategory.imagen;
-                    let toAppend = '<div class="col d-block col-6 col-md-3 col-sm-6 pt-1 pb-1 catCol" id="categoryCard" onclick="autoScrollTo(`' + noSpaceName + 'Anchor`)">' + //TODO: add onclick function for anchor
+                    let toAppend = '<div class="col d-block col-6 col-md-3 col-sm-6 pt-1 pb-1 catCol" id="categoryCard" onclick="autoScrollTo(`' + noSpaceName + 'Anchor`)">' +
                         '<img class="d-block img-responsive center-block" src="' + url + '" width="100%" /></div>';
                     $('#category-subcategoriesRow').append(toAppend)
 
@@ -100,40 +100,56 @@ function getSubcategories() {
                         success: function (data, status, xhr) {
                             if (data.success) {
 
-                                //TODO: if (data.products.length > 0) {
-                                let horizontalSection = '<section class="clean-block clean-info pl-0 pr-0 pt-4" id="' + noSpaceName + 'Anchor">' +
-                                    '<div class="row mb-2">' +
-                                    '<div class="col">' +
-                                    '<h4 class="text-left d-inline-block float-left" style="margin-left: 2vw;">' + subcategory.name + '</h4><a class="float-right mr-2 mt-2" data-toggle="modal" data-target="#catModal"><i class="fas fa-shopping-bag mr-2"></i><p class="d-inline-block">Ver más</p></a></div>' +
-                                    '</div>' +
-                                    // added padding left to solve problems on desktop
-                                    // 
-                                    '<section class="text-center d-lg-flex justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start horitzontalScroll" style="align-items: baseline;">';
-                                data.products.forEach(function (product, index) {
-                                    let productToAppend = '<a href="#" class="a-productContainer">' + //TODO: Add product link
-                                        '<div class="horitzontalScrollContent mr-3 ml-2" style="width: 225px;">' +
-                                        '<div class="row">' +
-                                        '<div class="col text-center"><img class="border rounded no-border" src="' + product.main_image + '" width="170px" /></div>' +
+                                let horizontalSection = '';
+
+                                if (data.products.length > 0) {
+                                    horizontalSection = '<section class="clean-block clean-info pl-0 pr-0 pt-4" id="' + noSpaceName + 'Anchor">' +
+                                        '<div class="row mb-2">' +
+                                        '<div class="col">' +
+                                        '<h4 class="text-left d-inline-block float-left" style="margin-left: 2vw;">' + subcategory.name + '</h4><a class="float-right mr-2 mt-2" data-toggle="modal" data-target="#catModal"><i class="fas fa-shopping-bag mr-2"></i><p class="d-inline-block">Ver más</p></a></div>' +
                                         '</div>' +
-                                        '<div class="row">' +
-                                        '<div class="col text-center">' +
-                                        '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 15px;color: #47729d;">' + product.name + '</h1>' +
+                                        // added padding left to solve problems on desktop
+                                        // 
+                                        '<section class="text-center d-lg-flex justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start horitzontalScroll" style="align-items: baseline;">';
+                                    data.products.forEach(function (product, index) {
+                                        let productToAppend = '<a id="' + product.id + '" onclick="openModal(this)" href="#" class="a-productContainer">' + //TODO: Add product link
+                                            '<div class="horitzontalScrollContent mr-3 ml-2" style="width: 225px;">' +
+                                            '<div class="row">' +
+                                            '<div class="col text-center"><img class="border rounded no-border" src="' + product.main_image + '" width="170px" /></div>' +
+                                            '</div>' +
+                                            '<div class="row">' +
+                                            '<div class="col text-center">' +
+                                            '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 15px;color: #47729d;">' + product.name + '</h1>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '<div class="row">' +
+                                            '<div class="col text-center">' +
+                                            '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #47729d;">' + product.units + '</h1>' +
+                                            '<h1 class="d-inline-block float-none ml-3" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #4354a3;">Q' + product.price + '</h1>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</a>';
+                                        horizontalSection += productToAppend;
+                                    });
+                                    horizontalSection = horizontalSection + '</section>' +
+                                        '</section>';
+                                    $('#subcategories-horizontalScrollWrapper').append(horizontalSection);
+                                } else {
+                                    horizontalSection = '<section class="clean-block clean-info pl-0 pr-0 pt-4" id="' + noSpaceName + 'Anchor">' +
+                                        '<div class="row mb-2">' +
+                                        '<div class="col">' +
+                                        '<h4 class="text-left d-inline-block float-left" style="margin-left: 2vw;">' + subcategory.name + '</h4></div>' +
                                         '</div>' +
-                                        '</div>' +
-                                        '<div class="row">' +
-                                        '<div class="col text-center">' +
-                                        '<h1 class="d-inline-block" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #47729d;">' + product.units + '</h1>' +
-                                        '<h1 class="d-inline-block float-none ml-3" style="font-family: Montserrat, sans-serif;font-size: 17px;color: #4354a3;">Q' + product.price + '</h1>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</a>';
-                                    horizontalSection += productToAppend;
-                                });
-                                horizontalSection = horizontalSection + '</section>' +
-                                    '</section>';
-                                $('#subcategories-horizontalScrollWrapper').append(horizontalSection);
-                                //TODO: }
+                                        // added padding left to solve problems on desktop
+                                        // 
+                                        '<section class="text-center d-lg-flex justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start horitzontalScroll" style="align-items: baseline;">';
+                                    let comingSoon = '<div class="row" style="padding-left: 75px"><h3> Coming Soon... </h3></div>'
+                                    horizontalSection = horizontalSection + comingSoon + '</section>' +
+                                        '</section>';
+                                    $('#subcategories-horizontalScrollWrapper').append(horizontalSection);
+                                }
+
 
 
                             } //success 
@@ -205,4 +221,3 @@ let todo = '<section class="clean-block clean-info pl-0 pr-0 pt-4">' +
     '</a>' +
     '</section>' +
     '</section>';
-
