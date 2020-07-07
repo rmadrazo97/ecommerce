@@ -106,13 +106,13 @@ function getSubcategories() {
                                     horizontalSection = '<section class="clean-block clean-info pl-0 pr-0 pt-4" id="' + noSpaceName + 'Anchor">' +
                                         '<div class="row mb-2">' +
                                         '<div class="col">' +
-                                        '<h4 class="text-left d-inline-block float-left" style="margin-left: 2vw;">' + subcategory.name + '</h4><a class="float-right mr-2 mt-2" data-toggle="modal" data-target="#catModal"><i class="fas fa-shopping-bag mr-2"></i><p class="d-inline-block">Ver más</p></a></div>' +
+                                        '<h4 class="text-left d-inline-block float-left" style="margin-left: 2vw;">' + subcategory.name + '</h4><a name="' + subcategory.name + '" id="' + subcategory.id + '" onclick="openSubcategoryModal(this)" class="float-right mr-2 mt-2" data-toggle="modal" data-target="#catModal"><i class="fas fa-shopping-bag mr-2"></i><p class="d-inline-block">Ver más</p></a></div>' +
                                         '</div>' +
                                         // added padding left to solve problems on desktop
                                         // 
                                         '<section class="text-center d-lg-flex justify-content-sm-start justify-content-md-start justify-content-lg-start justify-content-xl-start horitzontalScroll" style="align-items: baseline;">';
                                     data.products.forEach(function (product, index) {
-                                        let productToAppend = '<a id="' + product.id + '" onclick="openModal(this)" href="#" class="a-productContainer">' + //TODO: Add product link
+                                        let productToAppend = '<a id="' + product.id + '" onclick="openProductModal(this)" href="#" class="a-productContainer">' +
                                             '<div class="horitzontalScrollContent mr-3 ml-2" style="width: 225px;">' +
                                             '<div class="row">' +
                                             '<div class="col text-center"><img class="border rounded no-border" src="' + product.main_image + '" width="170px" /></div>' +
@@ -221,3 +221,59 @@ let todo = '<section class="clean-block clean-info pl-0 pr-0 pt-4">' +
     '</a>' +
     '</section>' +
     '</section>';
+
+
+
+function openSubcategoryModal(e) {
+    console.log(e.id);
+
+    console.log("Getting 1 Subcategory... ");
+
+    var url = apiUrl + "action=list&object=products&subcategory=" + e.id;
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function (data, status, xhr) {
+            if (data.success) {
+                $('#modalProductsContainer').empty();
+                $('#modalSubcategoryTitle').text(e.name);
+
+                data.products.forEach(function (product, index) {
+                    let modalProduct = '<div class="col col-sm-6 col-md-4 col-lg-3">' +
+                        '<div class="row">' +
+                        '<div class="col"><img src="' + product.main_image + '" width="100%" />' +
+                        '<div class="text-center" style="position: relative;padding: 3px; border-radius: 15px;background-color: rgba(160,160,160,0.35);">' +
+                        '<a id="' + product.id + '" onclick="openProductModal(this)" href="#" style="font-size: 12px;"><i class="fas fa-shopping-bag mr-1"></i>Agregar al Carrito  </a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<div class="col">' +
+                        '<p class="text-center mb-0" style="font-size: 14px;">' + product.name + '</p>' +
+                        '<p class="text-center mt-1" style="font-size: 13px;">' + product.units + '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+
+                    $('#modalProductsContainer').append(modalProduct);
+                });
+
+
+
+            } //success 
+            else {
+
+            } //else success					
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+
+
+        },
+        beforeSend: function (request) { // Set JWT header
+            // mandar Token de autenticacion
+            request.setRequestHeader('Authorization', 'Bearer ' + token);
+        }
+    });
+}
+
+

@@ -1,6 +1,6 @@
-function openModal(e) {
+function openProductModal(e) {
     let productId = e.id;
-
+    $('#catModal').modal('hide');
 
     console.log(productId);
     var url = apiUrl + "action=view&object=products&id=" + productId;
@@ -10,6 +10,8 @@ function openModal(e) {
         success: function (data, status, xhr) {
             if (data.success) {
                 console.log(data.products)
+
+                $('#modalProductTitle').text(data.products.name);
                 $('#productName').text(data.products.name);
                 $('#productPrice').text('Q ' + data.products.price);
                 $('#productDescription').text(data.products.desc)
